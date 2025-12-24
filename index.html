@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pokémon Viewer</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        #card { padding: 20px; border: 1px solid #ccc; width: 300px; }
+    </style>
+</head>
+<body>
+
+    <h1>Pokémon Viewer</h1>
+
+    <button onclick="loadRandom()">Get Random Pokémon</button>
+
+    <div id="card"></div>
+
+    <script>
+        async function loadRandom() {
+            const res = await fetch("http://127.0.0.1:8000/pokemon/random");
+            const data = await res.json();
+
+            document.getElementById("card").innerHTML = `
+                <h2>${data.name}</h2>
+                <p><strong>Height:</strong> ${data.height}</p>
+                <p><strong>Weight:</strong> ${data.weight}</p>
+                <p><strong>Types:</strong> ${data.types.join(", ")}</p>
+            `;
+        }
+    </script>
+
+</body>
+</html>
